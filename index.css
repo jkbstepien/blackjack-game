@@ -1,29 +1,84 @@
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;
-    background-image: url("images/table.png");
-    background-size: cover;
-    font-weight: bold;
-    color: white;
+    font-family: 'Poppins', sans-serif;
+    background: #22223b;
+    color: whitesmoke;
+    text-shadow: 1px 1px black;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-    color: goldenrod;
+    font-size: 2rem;
 }
 
-#message-el {
-    font-style: italic;
+h2 {
+    font-size: 1rem;
+}
+
+p {
+    font-size: 0.65rem;
+}
+
+.flex-container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center;
+}
+
+.functions-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1em 0;
+}
+
+.card-slot {
+    width: 5rem;
+    height: 7rem;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+    margin-left: 0.5em;
+}
+
+img.card {
+    width: 100%;
 }
 
 button {
-    color: #016f32;
-    width: 150px;
-    background: goldenrod;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-weight: bold;
-    border: none;
-    border-radius: 2px;
-    margin-bottom: 2px;
-    margin-top: 2px;
+    font-family: inherit;
+    margin: 0.25em;
+}
+
+footer {
+    padding-top: 4em;
+}
+
+footer p {
+    font-size: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .split {
+        flex-direction: column;
+    }
+
+    .functions-container .stats {
+        order: -1
+    }
 }
