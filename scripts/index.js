@@ -69,8 +69,6 @@ async function drawAnotherCard() {
 
     cardsOnTable++
 
-    console.log(cardsContainer.children)
-    // cardsContainer.innerHTML += `<div class="card-slot"></div>`
     cardsContainer.children[cardsOnTable - 1].innerHTML = `
         <img src=${data.cards[0].image} class="card" />
     `
@@ -78,7 +76,6 @@ async function drawAnotherCard() {
     myScore += mapCardValue(data.cards[0].value)
     cardSum.textContent = `Score: ${myScore}`
     getResult(myScore)
-    console.log(data.card[0].value)
 }
 
 drawCardBtn.addEventListener("click", drawAnotherCard)
@@ -90,6 +87,7 @@ function getResult(score) {
         balance += 100
         playBtn.disabled = true
         isGameWon = true
+        accountBalance.textContent = `Account balance: ${balance}$`
     } else {
         resultField.textContent = "Loss!"
         resultField.style.color = "red"
@@ -97,6 +95,7 @@ function getResult(score) {
         playBtn.disabled = true
         drawCardBtn.disabled = true
         isGameWon = false
+        accountBalance.textContent = `Account balance: ${balance}$`
     }
 }
 
@@ -111,7 +110,7 @@ function clearTable() {
     myScore = 0
     cardsOnTable = 2
     cardSum.textContent = `Score: ${myScore}`
-    accountBalance.textContent = `Account balance: ${balance}$`
+    // accountBalance.textContent = `Account balance: ${balance}$`
     resultField.textContent = ""
 
     playBtn.disabled = false
