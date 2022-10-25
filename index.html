@@ -1,10 +1,10 @@
 <html>
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="stylesheets/index.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <title>Blackjack game</title>
     <script async src="./scripts/index.js" type="module"></script>
     <script async src="./scripts/utils.js" type="module"></script>
@@ -16,34 +16,68 @@
     </header>
 
     <main>
-        <h2>Want to play a round?</h2>
-        <p id="load-deck"></p>
-        <p id="info">Click "Get card deck" to draw cards:</p>
+        <div class="top">
+            <h2>Want to play a round?</h2>
+            <button id="show-rules">Rules</button>
+        </div>
 
-            <div id="card-container">
-                <div class="card-slot"></div>
-                <div class="card-slot"></div>
-                <div class="card-slot"></div>
-                <div class="card-slot"></div>
-                <div class="card-slot"></div>
+        <!-- The Modal -->
+        <div class="modal" id="rulesModal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <h2>Object of the game</h2>
+                <p>Player attempts to beat the dealer (in this case computer) by getting as close to 21
+                    as possible, without ever going over 21.</p>
+                <p><strong>Card values: </strong>Ace is worth 11 point, face cards are 10 and any other card
+                    points is equal to its pip value.</p>
+
+                <button class="close">Close</button>
             </div>
 
-            <div class="functions-container">
-                <div>
-                    <button id="get-deck">Get card deck</button>
-                    <button id="start-game">Start game</button>
-                    <button id="draw-card">Draw card</button>
-                    <button id="reset">Clear table</button>
-                </div>
+        </div>
 
-                <div class="stats">
-                    <p id="card-score">Score: 0</p>
-                    <p id="account-balance">Account balance: 1000$</p>
-                </div>
+        <p id="info"></p>
+
+        <div id="card-container">
+            <div class="card-slot"></div>
+            <div class="card-slot"></div>
+            <div class="card-slot"></div>
+            <div class="card-slot"></div>
+            <div class="card-slot"></div>
+        </div>
+
+        <h2 id="result"></h2>
+
+        <div class="functions-container">
+            <div>
+                <button id="start-game">Start game</button>
+                <button id="draw-card">Draw card</button>
+                <button id="reset">Clear table</button>
             </div>
 
-        <h3 id="result"></h3>
+            <div class="stats">
+                <p id="card-score">Score: 0</p>
+                <p id="account-balance">Account balance: 1000$</p>
+            </div>
+        </div>
     </main>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <h2>Great progress so far!</h2>
+            <p>Click "Play" to load new deck of cards and start again.</p>
+
+            <div>
+                <button id="get-deck">Play</button>
+                <button class="close">Close</button>
+            </div>
+        </div>
+
+    </div>
 
     <footer>
         <p>Made by @jkbstepien</p>

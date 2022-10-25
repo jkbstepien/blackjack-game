@@ -7,9 +7,18 @@ const resetBtn = document.getElementById("reset")
 const cardsContainer = document.getElementById("card-container")
 const cardSum = document.getElementById("card-score")
 const infoEl = document.getElementById("info")
-const deckLoadStatus = document.getElementById("load-deck")
 const resultField = document.getElementById("result")
 const accountBalance = document.getElementById("account-balance")
+
+// Get the modal
+const modal = document.getElementById("myModal");
+const rulesModal = document.getElementById("rulesModal")
+
+const showRulesBtn = document.getElementById("show-rules")
+
+// Get the <span> element that closes the modal
+const closeRulesModalBtn = document.getElementsByClassName("close")[0];
+const closeModalBtn = document.getElementsByClassName("close")[1];
 
 let deckId
 let myScore = 0
@@ -17,7 +26,7 @@ let cardsOnTable = 2
 let balance = 1000
 let isGameWon = true
 
-playBtn.disabled = true
+playBtn.disabled = false
 drawCardBtn.disabled = true
 resetBtn.disabled = true
 
@@ -27,12 +36,15 @@ async function getDeckId() {
 
     deckId = data.deck_id
 
-    deckLoadStatus.textContent = `Obtained deck with ${data.remaining} cards`
     infoEl.textContent = ""
 
     playBtn.disabled = false
     resetBtn.disabled = false
+    modal.style.display = "none";
+    clearTable();
 }
+
+getDeckId().then(r => r.json())
 
 deckBtn.addEventListener("click", getDeckId)
 
@@ -57,6 +69,8 @@ async function startGame() {
     if (isGameWon) {
         drawCardBtn.disabled = false
     }
+
+    showEndDeckModal(data.remaining)
 }
 
 playBtn.addEventListener("click", startGame)
@@ -76,12 +90,13 @@ async function drawAnotherCard() {
     myScore += mapCardValue(data.cards[0].value)
     cardSum.textContent = `Score: ${myScore}`
     getResult(myScore)
+    showEndDeckModal(data.remaining)
 }
 
 drawCardBtn.addEventListener("click", drawAnotherCard)
 
 function getResult(score) {
-    if (score <= 17) {
+    if (score <= 21) {
         resultField.textContent = "Win!"
         resultField.style.color = "green"
         balance += 100
@@ -110,7 +125,6 @@ function clearTable() {
     myScore = 0
     cardsOnTable = 2
     cardSum.textContent = `Score: ${myScore}`
-    // accountBalance.textContent = `Account balance: ${balance}$`
     resultField.textContent = ""
 
     playBtn.disabled = false
@@ -118,3 +132,42 @@ function clearTable() {
 }
 
 resetBtn.addEventListener("click", clearTable)
+
+function showEndDeckModal(remainingCards) {
+
+    if (remainingCards === 0) {
+        // When there is no cards left in deck, prompt user.
+        modal.style.display = "block"
+
+        // When the user clicks on <button> ("Close"), close the modal.
+        closeModalBtn.onclick = function () {
+            modal.style.display = "none"
+        }
+
+        // When the user clicks anywhere outside the modal, close it.
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none"
+            }
+        }
+    }
+}
+
+function showRulesModal() {
+    // When user clicks "rules" button make modal visible.
+    rulesModal.style.display = "block"
+
+    // When the user clicks on <button> (x), close the modal.
+    closeRulesModalBtn.onclick = function () {
+        rulesModal.style.display = "none"
+    }
+
+    // When the user clicks anywhere outside the modal, close it.
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            rulesModal.style.display = "none"
+        }
+    }
+}
+
+showRulesBtn.addEventListener("click", showRulesModal)
